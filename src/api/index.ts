@@ -3,7 +3,8 @@ import userRoutes from './routes/userRoutes.ts';
 import productRoutes from './routes/productRoutes.ts';
 import orderRoutes from './routes/orderRoutes.ts';
 
-const api = express.Router();
+const api = express();
+api.use(express.json());
 
 api.use('/users', userRoutes);
 api.use('/products', productRoutes);
