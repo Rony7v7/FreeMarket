@@ -1,4 +1,4 @@
-export interface User {
+  export interface User {
     id: string;
     password: string;
     role: 'admin' | 'client';
@@ -16,9 +16,16 @@ export interface User {
   export interface Order {
     orderId: string;
     userId: string;
-    date: string;
-    items: { productId: string; quantity: number; price: number }[];
+    items: OrderItem[];
     totalAmount: number;
     status: 'completed' | 'pending' | 'cancelled';
   }
+
+  export interface OrderItem {
+    productId: string;
+    quantity: number;
+    price: number;
+  }
+
+
   

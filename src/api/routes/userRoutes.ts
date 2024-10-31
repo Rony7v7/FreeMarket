@@ -1,11 +1,17 @@
 import { Router } from 'express';
+import { addUser, getUsers } from '../controllers/userController.ts';
 
 const router = Router();
 
-router.post('/login', (req, res) => {
+router.get('/', (req, res) => {
+  const users = getUsers();
+  res.json(users);
 });
 
-router.post('/register', (req, res) => {
+router.post('/', (req, res) => {
+  const newUser = req.body;
+  const addedUser = addUser(newUser);
+  res.status(201).json(addedUser);
 });
 
 export default router;
