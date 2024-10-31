@@ -1,0 +1,84 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Defines the form data structure with fields for id and password.
+interface FormData {
+  id: string;
+  password: string;
+}
+
+// Initializes the form state with empty values for id and password.
+let formData: FormData = {
+  id: "",
+  password: "",
+};
+
+// Handles form submission; prevents default action and sends data to the backend.
+
+function handleSubmit(event: Event) {
+  event.preventDefault();
+  console.log("Form data:", formData);
+  // Logic to send form data (formData) to the backend
+}
+---
+
+<Layout title="Login">
+  <main class="flex-1 flex flex-col h-[100vh] gap-4 items-center p-4 justify-center bg-gray-100">
+    <section class="w-full max-w-md bg-white p-10 rounded-md">
+      <h1 class="font-semibold text-2xl text-zinc-900 w-full mb-1">
+        FreeMarket
+      </h1>
+      <p class="text-zinc-500 text-sm mb-8 w-full">
+        New here? <a
+          href="/register"
+          class="text-blue-600 underline underline-offset-2 font-medium"
+        >Create an account</a>
+      </p>
+
+      <form
+        action="/api/auth/signin"
+        method="post"
+        class="grid grid-cols-1 gap-3 w-full"
+      >
+        <div class="grid grid-cols-1 gap-2">
+          <label
+            for="id"
+            class="font-medium text-zinc-900 text-sm"
+          >
+            ID
+          </label>
+          <input
+            id="ID"
+            type="text"
+            name="ID"
+            class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
+            required
+          />
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <label
+            for="password"
+            class="font-medium text-zinc-900 text-sm"
+          >
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="bg-zinc-900 border-zinc-900 py-1.5 border rounded-md mt-2 text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Sign In
+        </button>
+      </form>
+    </section>
+  </main>
+</Layout>
