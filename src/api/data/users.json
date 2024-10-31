@@ -1,0 +1,11 @@
+[
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john@example.com",
+      "password": "hashed_password",
+      "role": "client",
+      "orderIds": ["order_1"]
+    }
+  ]
+  
