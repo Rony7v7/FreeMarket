@@ -1,7 +1,7 @@
 
 import fs from 'fs';
 import path from 'path';
-import { User } from '../models/User.ts';
+import { User } from '../models/User';
 
 const dataPath = path.join(__dirname, '../data/users.json');
 

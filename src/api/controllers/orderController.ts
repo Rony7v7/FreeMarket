@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { Order } from '../models/Order.ts';
-import { OrderItem } from '../models/OrderItem.ts';
+import { Order } from '../models/Order';
+import { OrderItem } from '../models/OrderItem';
 
 const dataPath = path.join(__dirname, '../data/orders.json');
 

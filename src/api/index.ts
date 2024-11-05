@@ -1,7 +1,7 @@
 import express from 'express';
-import userRoutes from './routes/userRoutes.ts';
-import productRoutes from './routes/productRoutes.ts';
-import orderRoutes from './routes/orderRoutes.ts';
+import userRoutes from './routes/userRoutes';
+import productRoutes from './routes/productRoutes';
+import orderRoutes from './routes/orderRoutes';
 
 const api = express();
 api.use(express.json());
