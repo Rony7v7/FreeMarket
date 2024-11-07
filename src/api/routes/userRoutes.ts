@@ -1,17 +1,14 @@
-import { Router } from 'express';
-import { addUser, getUsers } from '../controllers/userController';
+// src/api/routes/userRoutes.ts
+import express from 'express';
+import { getAllUsers, createUser, getUserById, updateUser, deleteUser } from '../controllers/userController';
 
-const router = Router();
+const router = express.Router();
 
-router.get('/', (req, res) => {
-  const users = getUsers();
-  res.json(users);
-});
-
-router.post('/', (req, res) => {
-  const newUser = req.body;
-  const addedUser = addUser(newUser);
-  res.status(201).json(addedUser);
-});
+// Definición de rutas para usuarios
+router.get('/', getAllUsers);          // Obtener todos los usuarios
+router.post('/', createUser);          // Crear un nuevo usuario
+router.get('/:id', getUserById);       // Obtener un usuario específico por ID
+router.put('/:id', updateUser);        // Actualizar un usuario específico por ID
+router.delete('/:id', deleteUser);     // Eliminar un usuario específico por ID
 
 export default router;
