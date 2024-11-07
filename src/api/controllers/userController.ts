@@ -26,12 +26,20 @@ export const getAllUsers = (req: Request, res: Response): void => {
 // Crear un nuevo usuario
 export const createUser = (req: Request, res: Response): void => {
   const users = getUsers();
-  const newUser: User = req.body as User;
+
+  // Obtener el ID más alto en la lista y asignar uno nuevo
+  const newUserId = users.length > 0 ? Math.max(...users.map(u => parseInt(u.id))) + 1 : 1;
+
+  // Crear el nuevo usuario con el ID numérico asignado automáticamente
+  const newUser: User = {
+    id: newUserId.toString(), // Convertir a string si `id` es de tipo string en el modelo
+    ...req.body
+  };
+
   users.push(newUser);
   saveUsers(users);
   res.status(201).json(newUser);
 };
-
 // Obtener un usuario por ID
 export const getUserById = (req: Request, res: Response): void => {
   const users = getUsers();

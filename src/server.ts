@@ -1,8 +1,17 @@
 // src/server.ts
 import express from 'express';
-import userRoutes from './api/routes/userRoutes';
+import api from './api/index'; // Importa `index.ts` desde `src/api`
 
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-app.use(express.json()); // Middleware para manejar JSON
+// Middleware para manejar JSON
+app.use(express.json());
+
+// Monta todas las rutas de `api/index` bajo el prefijo `/api`
+app.use('', api);
+
+// Iniciar el servidor en el puerto especificado
+app.listen(PORT, () => {
+  console.log(`API server running on http://localhost:${PORT}`);
+});
