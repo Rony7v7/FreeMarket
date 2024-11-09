@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "start": "node dist/server.cjs",
-    "build": "astro check && astro build",
+    "start": "node dist/server.js",
+    "build": "astro check && astro build && npm run copy-data",
     "preview": "astro preview",
     "astro": "astro",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "copy-data": "mkdir -p dist/api/data && cp src/api/data/*.json dist/api/data/",
+    "sync-data": "cp dist/api/data/*.json src/api/data/",
+    "watch-json": "nodemon --watch dist/api/data --exec 'npm run sync-data'"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -19,6 +22,8 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "nodemon": "^2.0.20"
   }
 }
+
