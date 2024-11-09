@@ -21,9 +21,15 @@ function saveOrders(orders: Order[]): void {
 }
 
 // Leer productos desde el archivo JSON
+// src/api/controllers/orderController.ts
 function getProducts(): Product[] {
   const data = fs.readFileSync(productDataPath, 'utf8');
-  return JSON.parse(data) as Product[];
+  const productsData = JSON.parse(data);
+
+  // Convertir cada objeto producto en una instancia de la clase Product
+  return productsData.map((product: any) => {
+    return new Product(product.id, product.name, product.description, product.price, product.quantity);
+  });
 }
 
 // Guardar productos en el archivo JSON

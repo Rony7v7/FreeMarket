@@ -1,12 +1,16 @@
 [
-    {
-      "orderId": "order_1",
-      "userId": "1",
-      "items": [
-        { "productId": "product_1", "quantity": 2, "price": 15.99 }
-      ],
-      "totalAmount": 31.98,
-      "status": "completed"
-    }
-  ]
-  
+  {
+    "orderId": "1",
+    "userId": "2",
+    "date": "2024-11-09T23:11:12.343Z",
+    "items": [
+      {
+        "productId": "1",
+        "quantity": 2,
+        "price": 2
+      }
+    ],
+    "totalAmount": 4,
+    "status": "pending"
+  }
+]
