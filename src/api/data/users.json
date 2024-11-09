@@ -1,11 +1,19 @@
 [
-    {
-      "id": "1",
-      "name": "John Doe",
-      "email": "john@example.com",
-      "password": "hashed_password",
-      "role": "client",
-      "orderIds": ["order_1"]
-    }
-  ]
-  
+  {
+    "id": "1",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "password": "hashed_password",
+    "role": "client",
+    "orderIds": [
+      "order_1"
+    ]
+  },
+  {
+    "id": "2",
+    "name": "gabriel",
+    "email": "xxx@example.com",
+    "password": "hashed_passwordx",
+    "role": "client"
+  }
+]
