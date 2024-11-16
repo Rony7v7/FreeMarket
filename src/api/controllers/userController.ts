@@ -24,7 +24,7 @@ export const loginUser = (req: Request, res: Response): void => {
     return;
   }
 
-  const isPasswordValid = password === user.password; // Comparación directa (insegura)
+  const isPasswordValid = password === user.password;
   if (!isPasswordValid) {
     res.status(401).json({ message: 'Invalid credentials' });
     return;
@@ -32,7 +32,11 @@ export const loginUser = (req: Request, res: Response): void => {
 
   const token = jwt.sign({ id: user.id, role: user.role }, secretKey, { expiresIn: '1h' });
 
-  res.json({ token, user: { id: user.id, name: user.name, role: user.role } });
+  res.json({ 
+    message: 'Login successful', 
+    token, 
+    user: { id: user.id, name: user.name, role: user.role } 
+  });
 };
 
 // Guardar usuarios en el archivo JSON
