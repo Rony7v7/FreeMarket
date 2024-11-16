@@ -3,14 +3,37 @@ import fs from 'fs';
 import path from 'path';
 import { Request, Response } from 'express';
 import { User } from '../models/User';
+import jwt from 'jsonwebtoken';
 
 const dataPath = path.join(__dirname, '../data/users.json');
+const secretKey = 'secret_key' 
 
 // Leer usuarios desde el archivo JSON
 function getUsers(): User[] {
   const data = fs.readFileSync(dataPath, 'utf8');
   return JSON.parse(data) as User[];
 }
+
+export const loginUser = (req: Request, res: Response): void => {
+  const { email, password } = req.body;
+  const users = getUsers();
+  const user = users.find(u => u.email === email);
+
+  if (!user) {
+    res.status(401).json({ message: 'Invalid credentials' });
+    return;
+  }
+
+  const isPasswordValid = password === user.password; // Comparación directa (insegura)
+  if (!isPasswordValid) {
+    res.status(401).json({ message: 'Invalid credentials' });
+    return;
+  }
+
+  const token = jwt.sign({ id: user.id, role: user.role }, secretKey, { expiresIn: '1h' });
+
+  res.json({ token, user: { id: user.id, name: user.name, role: user.role } });
+};
 
 // Guardar usuarios en el archivo JSON
 function saveUsers(users: User[]): void {
