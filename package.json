@@ -8,9 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "tsc": "tsc",
-    "copy-data": "mkdir -p dist/api/data && cp src/api/data/*.json dist/api/data/",
-    "sync-data": "cp dist/api/data/*.json src/api/data/",
-    "watch-json": "nodemon --watch dist/api/data --exec 'npm run sync-data'"
+    "copy-data": "node copyData.js",
+    "sync-data": "node copyData.js"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
