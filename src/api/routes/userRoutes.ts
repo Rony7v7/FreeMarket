@@ -9,7 +9,7 @@ const router = express.Router();
 // router.get('/', authenticateToken, getAllUsers);
 
 // Definición de rutas para usuarios
-router.get('/', getAllUsers);          // Obtener todos los usuarios
+router.get('/', authenticateToken, getAllUsers);
 router.post('/', createUser);          // Crear un nuevo usuario
 router.get('/:id', getUserById);       // Obtener un usuario específico por ID
 router.put('/:id', updateUser);        // Actualizar un usuario específico por ID
