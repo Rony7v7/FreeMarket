@@ -1,54 +1,102 @@
-# Astro Starter Kit: Basics
 
-```sh
-npm create astro@latest -- --template basics
-```
+# FreeMarket
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+FreeMarket es una aplicación de comercio que combina un frontend desarrollado con **Astro** y un backend basado en **Express** para gestionar usuarios, productos y órdenes. Este proyecto utiliza **TypeScript**, **Tailwind CSS** y manipula datos almacenados en formato JSON.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 👥 Integrantes 
+* David Artunduaga Penagos(A00396342)
+* Rony Farid Ordoñez García
+* Gabriel Ernesto Escobar
+* Vanessa Sánchez Morales
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 📂 Estructura del Proyecto
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
+```plaintext
+./
 ├── public/
-│   └── favicon.svg
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── api/            # Backend
+│   ├── components/     # Componentes Astro
+│   ├── layouts/        # Plantillas generales
+│   ├── pages/          # Páginas del sitio
+│   └── server.ts       # Entrada principal del servidor
+├── package.json        # Configuración de dependencias y scripts
+├── tailwind.config.mjs # Configuración de Tailwind CSS
+├── tsconfig.json       # Configuración de TypeScript
+└── .gitignore          # Archivos ignorados por Git
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🚀 Requisitos Previos
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+1. **Node.js**: Asegúrate de tener instalada la versión 16 o superior.
+2. **npm**: Incluido con Node.js.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## 🔧 Instalación
 
-## 🧞 Commands
+1. Clona el repositorio:
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd FreeMarket
+   ```
 
-All commands are run from the root of the project, from a terminal:
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## 🏃‍♂️ Ejecución del Proyecto
 
-## 👀 Want to learn more?
+### 1. Configuración y Ejecución del Backend
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+1. Abre una terminal.
+2. Construye el proyecto con:
+   ```bash
+   npm run build
+   ```
+3. Compila los archivos TypeScript:
+   ```bash
+   npx tsc
+   ```
+4. Ejecuta el servidor backend:
+   ```bash
+   npm start
+   ```
+5. El backend estará disponible en: [http://localhost:4000](http://localhost:4000).
+
+### 2. Configuración y Ejecución del Frontend
+
+1. En una nueva terminal, inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+2. El frontend estará disponible en: [http://localhost:4321](http://localhost:4321).
+
+### Sincronización de Datos
+Ejecuta el siguiente comando en una tercera terminal para observar cambios en los archivos JSON y sincronizarlos automáticamente:
+```bash
+npm run watch-json
+```
+
+## 🧪 Scripts Disponibles
+
+| Comando              | Acción                                                 |
+|----------------------|-------------------------------------------------------|
+| `npm run dev`        | Inicia el servidor de desarrollo del frontend.         |
+| `npm start`          | Inicia el servidor backend.                            |
+| `npm run build`      | Compila el proyecto completo para producción.          |
+| `npm run sync-data`  | Sincroniza los datos entre archivos JSON.              |
+| `npx tsc`            | Compila los archivos TypeScript.                       |
+
+## ⚠️ Notas Importantes
+
+- **Persistencia**: Los datos se manejan a través de archivos JSON en la carpeta `src/api/data/`. Asegúrate de no borrar estos archivos accidentalmente.
+- **Autenticación**: Algunas rutas están protegidas y requieren un token JWT.
+
+## 🛠️ Tecnologías Usadas
+
+- **Astro**: Framework de frontend.
+- **Express**: Framework de backend.
+- **TypeScript**: Para tipado estático.
+- **Tailwind CSS**: Estilización del frontend.
+- **JSON Web Token (JWT)**: Manejo de autenticación y autorización.
+
