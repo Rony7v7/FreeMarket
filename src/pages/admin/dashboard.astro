@@ -1,0 +1,160 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ProductsList from "../../components/ProductsList.astro";
+---
+
+<Layout title="FreeMarket">
+  <main class="min-h-screen bg-gray-100">
+    <div class="w-full flex justify-center items-center p-5">
+      <button
+        id="add-product-btn"
+        class="bg-gray-800 text-white py-2 px-4 rounded-md hover:bg-gray-900"
+      >
+        Add Product
+      </button>
+    </div>
+
+    <ProductsList role="admin" />
+
+    <!-- Modal para agregar productos -->
+    <div
+      id="add-product-modal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden"
+    >
+      <div class="bg-white p-6 rounded-lg shadow-md w-full max-w-md">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Add Product</h2>
+        <form id="add-product-form" class="grid gap-4">
+          <div>
+            <label for="name" class="block text-gray-600 mb-1">Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              class="w-full border border-gray-300 rounded-md p-2"
+              required
+            />
+          </div>
+          <div>
+            <label for="description" class="block text-gray-600 mb-1">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              class="w-full border border-gray-300 rounded-md p-2"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <div>
+            <label for="price" class="block text-gray-600 mb-1">Price</label>
+            <input
+              id="price"
+              type="number"
+              name="price"
+              class="w-full border border-gray-300 rounded-md p-2"
+              required
+            />
+          </div>
+          <div>
+            <label for="quantity" class="block text-gray-600 mb-1">Available Quantity</label>
+            <input
+              id="quantity"
+              type="number"
+              name="quantity"
+              class="w-full border border-gray-300 rounded-md p-2"
+              required
+            />
+          </div>
+          <div>
+            <label for="img" class="block text-gray-600 mb-1">Image URL</label>
+            <input
+              id="img"
+              type="url"
+              name="img"
+              class="w-full border border-gray-300 rounded-md p-2"
+              required
+            />
+          </div>
+          <div class="flex justify-end gap-2">
+            <button
+              type="button"
+              id="cancel-add-product"
+              class="bg-gray-500 text-white py-1 px-3 rounded-md hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="bg-gray-800 text-white py-1 px-3 rounded-md hover:bg-gray-900"
+            >
+              Add Product
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const addProductBtn = document.getElementById("add-product-btn");
+        const addProductModal = document.getElementById("add-product-modal");
+        const addProductForm = document.getElementById("add-product-form") as HTMLFormElement;
+        const cancelAddProduct = document.getElementById("cancel-add-product");
+        const token = localStorage.getItem("token");
+
+        if (!addProductBtn || !addProductModal || !addProductForm || !cancelAddProduct) {
+          console.error("One or more elements are not found in the DOM.");
+          return;
+        }
+
+        // Abrir el modal
+        addProductBtn.addEventListener("click", () => {
+          addProductModal.classList.remove("hidden");
+        });
+
+        // Cerrar el modal
+        cancelAddProduct.addEventListener("click", () => {
+          addProductModal.classList.add("hidden");
+        });
+
+        // Manejar la creación de productos
+        addProductForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+
+          const formData = new FormData(addProductForm as HTMLFormElement);
+          const newProduct = {
+            name: formData.get("name"),
+            description: formData.get("description"),
+            price: parseFloat(formData.get("price") as string),
+            quantity: parseInt(formData.get("quantity") as string, 10),
+            img: formData.get("img") as string,
+          };
+
+          try {
+
+            const response = await fetch("http://localhost:4000/products", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`,
+            },
+            body: JSON.stringify(newProduct),
+            });
+
+
+            if (response.ok) {
+              alert("Product added successfully!");
+              addProductModal.classList.add("hidden");
+              addProductForm.reset();
+              window.location.reload(); 
+            } else {
+              throw new Error("Failed to add product");
+            }
+          } catch (error) {
+            console.error(error);
+            alert("An error occurred while adding the product.");
+          }
+        });
+      });
+    </script>
+  </main>
+</Layout>
