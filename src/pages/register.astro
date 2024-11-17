@@ -1,0 +1,109 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const id = data.get("id");
+    const name = data.get("name");
+    const email = data.get("email");
+    const password = data.get("password");
+
+    console.log("Data");
+
+    console.log(name, email, password);
+
+    const response = await fetch("http://localhost:4000/api/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id,
+        name,
+        email,
+        password,
+      }),
+    }); 
+
+    if (response.ok) {
+      console.log("User created");
+      return Astro.redirect("/login");
+    } else {
+      console.error("User not created");
+    }
+    
+
+  } catch (error) {
+    if (error instanceof Error) {
+
+      console.error(error.message);
+    }
+  }
+}
+
+---
+
+<Layout title="Register">
+  <main class="flex-1 flex flex-col h-[100vh] gap-4 items-center p-4 justify-center bg-gray-100">
+    <section class="w-full max-w-md bg-white p-10 rounded-md">
+      <h1 class="font-semibold text-2xl text-zinc-900 w-full mb-1">
+        FreeMarket - Register
+      </h1>
+
+      <!-- Formulario -->
+      <form id="register-form" class="grid grid-cols-1 gap-3 w-full" method="post">
+        <div class="grid grid-cols-1 gap-2">
+          <label for="id" class="font-medium text-zinc-900 text-sm">ID</label>
+          <input
+            id="id"
+            type="text"
+            name="id"
+            class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
+            required
+          />
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <label for="name" class="font-medium text-zinc-900 text-sm">Name</label>
+          <input
+            id="name"
+            type="text"
+            name="name"
+            class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
+            required
+          />
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <label for="email" class="font-medium text-zinc-900 text-sm">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
+            required
+          />
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <label for="password" class="font-medium text-zinc-900 text-sm">Password</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          class="bg-zinc-900 border-zinc-900 py-1.5 border rounded-md mt-2 text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Sign up
+        </button>
+      </form>
+    </section>
+  </main>
+</Layout>
