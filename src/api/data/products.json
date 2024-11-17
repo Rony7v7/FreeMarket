@@ -1,9 +1,82 @@
 [
   {
     "id": "1",
-    "name": "carro",
-    "description": "muy rapido",
-    "price": 2,
-    "quantity": 28
+    "name": "Supercar X100",
+    "description": "A sports car with cutting-edge technology and unmatched speed.",
+    "img": "https://i.pinimg.com/736x/b0/5d/54/b05d54ab9e33b72d07f691979ce787dd.jpg",
+    "price": 50000,
+    "quantity": 10
+  },
+  {
+    "id": "2",
+    "name": "HYPER X Headphones",
+    "description": "High-definition surround sound for gamers and music lovers.",
+    "img": "https://i.pinimg.com/736x/f5/e1/bb/f5e1bba56a714e34c081e6aec1018daf.jpg",
+    "price": 150,
+    "quantity": 25
+  },
+  {
+    "id": "3",
+    "name": "Quantum Smartwatch",
+    "description": "An elegant design combining health, technology, and style.",
+    "img": "https://i.pinimg.com/736x/44/42/18/44421813d3347e52b70397fa6c05c58d.jpg",
+    "price": 120,
+    "quantity": 50
+  },
+  {
+    "id": "4",
+    "name": "4K Pro Drone Camera",
+    "description": "Capture your moments from above with cinematic quality.",
+    "img": "https://i.pinimg.com/736x/74/17/f8/7417f8849f79db44234cd40f3915e573.jpg",
+    "price": 300,
+    "quantity": 15
+  },
+  {
+    "id": "5",
+    "name": "WildTrek Hiking Boots",
+    "description": "Perfect for exploring nature with comfort and durability.",
+    "img": "https://i.pinimg.com/736x/3c/01/c7/3c01c7999a7be4eaf55006b8c6074861.jpg",
+    "price": 90,
+    "quantity": 20
+  },
+  {
+    "id": "6",
+    "name": "ProMax 15 Laptop",
+    "description": "A powerful machine for creatives and developers.",
+    "img": "https://i.pinimg.com/736x/d0/70/07/d070075c1d5b8d094d43a36ea431d44c.jpg",
+    "price": 1200,
+    "quantity": 8
+  },
+  {
+    "id": "7",
+    "name": "360 Virtual Reality Glasses",
+    "description": "Experience the virtual world with a fully immersive perspective.",
+    "img": "https://i.pinimg.com/736x/f3/4e/e3/f34ee320ce215d460e5c68a7b2b97b49.jpg",
+    "price": 250,
+    "quantity": 30
+  },
+  {
+    "id": "8",
+    "name": "ChefMaster Cookware Set",
+    "description": "High-quality utensils for cooking enthusiasts.",
+    "img": "https://i.pinimg.com/736x/19/0e/af/190eaf33b2f31cca9045daa33f20cc02.jpg",
+    "price": 80,
+    "quantity": 40
+  },
+  {
+    "id": "9",
+    "name": "EcoRide Electric Bike",
+    "description": "The most eco-friendly and modern way to travel around the city.",
+    "img": "https://i.pinimg.com/736x/0c/98/65/0c98656248481bd5986ccb8831e28efc.jpg",
+    "price": 1500,
+    "quantity": 5
+  },
+  {
+    "id": "10",
+    "name": "ProThrone Gaming Chair",
+    "description": "Designed for long sessions with comfort and style.",
+    "img": "https://i.pinimg.com/736x/9b/8c/04/9b8c04c92551bb36b30b3a20a3b4ea6c.jpg",
+    "price": 200,
+    "quantity": 12
   }
 ]
