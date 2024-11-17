@@ -1,39 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const email = data.get("email"); 
-    const password = data.get("password");
-
-    console.log(email, password);
-
-    const response = await fetch("http://localhost:4000/api/users/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    console.log(response);
-
-  } catch (error) {
-    if (error instanceof Error) {
-      console.log("ERROR");
-      console.error(error.message);
-    }
-  }
-}
-
 ---
 
 <Layout title="Login">
   <main class="flex-1 flex flex-col h-[100vh] gap-4 items-center p-4 justify-center bg-gray-100">
     <section class="w-full max-w-md bg-white p-10 rounded-md">
       <h1 class="font-semibold text-2xl text-zinc-900 w-full mb-1">
-        FreeMarket
+        FreeMarket - Login
       </h1>
       <p class="text-zinc-500 text-sm mb-8 w-full">
         New here? <a
@@ -43,10 +16,7 @@ if (Astro.request.method === "POST") {
       </p>
 
       <!-- Formulario de Login -->
-      <form
-        method="post"
-        class="grid grid-cols-1 gap-3 w-full"
-      >
+      <form id="login-form" class="grid grid-cols-1 gap-3 w-full">
         <div class="grid grid-cols-1 gap-2">
           <label
             for="email"
@@ -88,4 +58,52 @@ if (Astro.request.method === "POST") {
       </form>
     </section>
   </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const loginForm = document.getElementById("login-form") as HTMLFormElement;
+
+      // limpiar localStorage
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+      if (!loginForm) return;
+      
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault(); // Evita el comportamiento por defecto del formulario
+
+        const formData = new FormData(loginForm);
+        const email = formData.get("email");
+        const password = formData.get("password");
+
+        try {
+          const response = await fetch("http://localhost:4000/api/users/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email, password }),
+          });
+
+          if (response.ok) {
+            const { token, user } = await response.json();
+
+            localStorage.setItem("token", token);
+            localStorage.setItem("user", JSON.stringify(user));
+
+            window.location.href = user.role === "admin" ? "/admin/dashboard/" : user.role === "client" ? "/client/dashboard/" : "/";
+
+          } else {
+            const { message } = await response.json();
+            alert(message);
+          }
+        } catch (error) {
+          console.error("Error en el login:", error);
+          alert("Hubo un problema al intentar iniciar sesión. Intenta nuevamente.");
+        }
+      });
+
+    });
+  </script>
+
 </Layout>

@@ -4,14 +4,12 @@ import Layout from "../layouts/Layout.astro";
 if (Astro.request.method === "POST") {
   try {
     const data = await Astro.request.formData();
-    const id = data.get("id");
     const name = data.get("name");
     const email = data.get("email");
     const password = data.get("password");
+    const role = data.get("role");
 
-    console.log("Data");
-
-    console.log(name, email, password);
+    console.log("Data:", {name, email, password, role });
 
     const response = await fetch("http://localhost:4000/api/users", {
       method: "POST",
@@ -19,12 +17,12 @@ if (Astro.request.method === "POST") {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id,
         name,
         email,
         password,
+        role,
       }),
-    }); 
+    });
 
     if (response.ok) {
       console.log("User created");
@@ -32,16 +30,13 @@ if (Astro.request.method === "POST") {
     } else {
       console.error("User not created");
     }
-    
 
   } catch (error) {
     if (error instanceof Error) {
-
-      console.error(error.message);
+      console.error("Error:", error.message);
     }
   }
 }
-
 ---
 
 <Layout title="Register">
@@ -53,17 +48,6 @@ if (Astro.request.method === "POST") {
 
       <!-- Formulario -->
       <form id="register-form" class="grid grid-cols-1 gap-3 w-full" method="post">
-        <div class="grid grid-cols-1 gap-2">
-          <label for="id" class="font-medium text-zinc-900 text-sm">ID</label>
-          <input
-            id="id"
-            type="text"
-            name="id"
-            class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
-            required
-          />
-        </div>
-
         <div class="grid grid-cols-1 gap-2">
           <label for="name" class="font-medium text-zinc-900 text-sm">Name</label>
           <input
@@ -95,6 +79,19 @@ if (Astro.request.method === "POST") {
             class="rounded-md py-1 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
             required
           />
+        </div>
+
+        <div class="grid grid-cols-1 gap-2">
+          <label for="role" class="font-medium text-zinc-900 text-sm">Role</label>
+          <select
+            id="role"
+            name="role"
+            class="rounded-md py-2 px-3 bg-zinc-50 text-zinc-900 border border-zinc-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:bg-white focus:ring-opacity-60"
+            required
+          >
+            <option value="client">Client</option>
+            <option value="admin">Admin</option>
+          </select>
         </div>
 
         <button
