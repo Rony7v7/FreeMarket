@@ -28,7 +28,7 @@ function getProducts(): Product[] {
 
   // Convertir cada objeto producto en una instancia de la clase Product
   return productsData.map((product: any) => {
-    return new Product(product.id, product.name, product.description, product.price, product.quantity);
+    return new Product(product.id, product.name, product.description, product.img, product.price, product.quantity);
   });
 }
 
@@ -58,7 +58,7 @@ export const createOrder = (req: Request, res: Response): void => {
     new Date().toISOString(), // date
     req.body.items as OrderItem[], // items
     0, // totalAmount, se calculará más tarde
-    'pending' // status
+    req.body.status ?? "pending" // status
   );
 
   // Calcular el total de la orden
