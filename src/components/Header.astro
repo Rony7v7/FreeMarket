@@ -4,15 +4,21 @@
   <nav id="nav-links">
     <ul class="flex gap-6 items-center">
       <li><a href="/" class="text-gray-700 hover:text-gray-900 font-medium transition">Home</a></li>
-      <li><a href="/products" class="text-gray-700 hover:text-gray-900 font-medium transition">Products</a></li>
     </ul>
   </nav>
   
-  <div id="cart-icon" class="relative">
-    <a href="/cart" class="text-gray-700 hover:text-gray-900 font-medium transition">
-      Cart
-      <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 text-sm hidden">0</span>
-    </a>
+  <div class="flex items-center gap-4">
+    <div id="orders-icon" class="relative">
+      <a href="/client/orders" class="text-gray-700 hover:text-gray-900 font-medium transition">
+        Orders
+      </a>
+    </div>
+    <div id="cart-icon" class="relative">
+      <a href="/client/cart" class="text-gray-700 hover:text-gray-900 font-medium transition">
+        Cart
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 text-sm hidden">0</span>
+      </a>
+    </div>
   </div>
 </header>
 
@@ -24,6 +30,7 @@
     const user = JSON.parse(localStorage.getItem("user") ?? "{}");
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
+    // Actualizar conteo del carrito
     if (cart.length > 0) {
       if (cartCount !== null) {
         cartCount.textContent = cart.length;
@@ -52,11 +59,12 @@
     navLinks.innerHTML = `
       <ul class="flex gap-6 items-center">
         <li><a href="/" class="text-gray-700 hover:text-gray-900 font-medium transition">Home</a></li>
-        <li><a href="/products" class="text-gray-700 hover:text-gray-900 font-medium transition">Products</a></li>
         ${
           user.role === "admin"
             ? `<li><a href="/admin/dashboard" class="text-gray-700 hover:text-gray-900 font-medium transition">Dashboard</a></li>`
-            : `<li><a href="/client/dashboard" class="text-gray-700 hover:text-gray-900 font-medium transition">Dashboard</a></li>`
+            : `
+              <li><a href="/client/dashboard" class="text-gray-700 hover:text-gray-900 font-medium transition">Dashboard</a></li>
+            `
         }
         <li><a href="/login" class="text-gray-700 hover:text-gray-900 font-medium transition">Logout</a></li>
       </ul>
