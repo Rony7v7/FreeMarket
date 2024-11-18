@@ -4,7 +4,7 @@
 FreeMarket es una aplicación de comercio que combina un frontend desarrollado con **Astro** y un backend basado en **Express** para gestionar usuarios, productos y órdenes. Este proyecto utiliza **TypeScript**, **Tailwind CSS** y manipula datos almacenados en formato JSON.
 
 ## 👥 Integrantes 
-* David Artunduaga Penagos(A00396342)
+* David Artunduaga Penagos
 * Rony Farid Ordoñez García
 * Gabriel Ernesto Escobar
 * Vanessa Sánchez Morales
@@ -71,11 +71,6 @@ FreeMarket es una aplicación de comercio que combina un frontend desarrollado c
    ```
 2. El frontend estará disponible en: [http://localhost:4321](http://localhost:4321).
 
-### Sincronización de Datos
-Ejecuta el siguiente comando en una tercera terminal para observar cambios en los archivos JSON y sincronizarlos automáticamente:
-```bash
-npm run watch-json
-```
 
 ## 🧪 Scripts Disponibles
 
@@ -84,7 +79,6 @@ npm run watch-json
 | `npm run dev`        | Inicia el servidor de desarrollo del frontend.         |
 | `npm start`          | Inicia el servidor backend.                            |
 | `npm run build`      | Compila el proyecto completo para producción.          |
-| `npm run sync-data`  | Sincroniza los datos entre archivos JSON.              |
 | `npx tsc`            | Compila los archivos TypeScript.                       |
 
 ## ⚠️ Notas Importantes
